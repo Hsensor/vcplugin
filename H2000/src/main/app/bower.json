@@ -1,0 +1,41 @@
+{
+  "name": "vcenter_plugin",
+  "version": "0.0.1",
+  "authors": [
+    "xulu3 <xulu3@lenovo.com>"
+  ],
+  "dependencies": {
+    "jquery": "3.1.0",
+    "jquery-validation": "^1.15.1",
+    "requirejs": "^2.2.0",
+    "bootstrap": "^3.3.7",
+    "malihu-custom-scrollbar-plugin": "3.1.5",
+    "jquery-mousewheel": "3.1.13",
+    "highcharts": "4.2.5",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.42"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": []
+    },
+    "malihu-custom-scrollbar-plugin": {
+      "main": [
+        "jquery.mCustomScrollbar.js"
+      ]
+    },
+    "highcharts": {
+      "main": [
+        "highcharts.js"
+      ]
+    },
+    "eonasdan-bootstrap-datetimepicker":{
+      "main":[
+        "src/js/bootstrap-datetimepicker.js"
+      ]
+    },
+    "moment":{
+      "main":["min/moment-with-locales.js"]
+    }
+  },
+  "description": "lenovo vcenter plugin"
+}

@@ -1,0 +1,456 @@
+.table{
+	background-color: #fff;
+}
+.alarm-content .table,.event-content .table{
+	background-color: #effaff;
+}
+.align-center{
+	text-align: center;
+}
+.create-tip{
+	color: red;
+}
+.card-detail-wrap >div.card-detail{
+	text-align: left;
+	padding: 39px 10px 10px 10px;
+}
+.card-detail-wrap .datastore-name{
+	text-overflow:ellipsis;
+  	overflow:hidden; 
+  	white-space:nowrap;
+  	width: 100%;
+ }
+.volume_container .card-detail-wrap > div.card-detail{
+	padding-top: 29px
+}
+.card-detail p{
+	margin:0 0 6px 0;
+}
+.detail-tab-nav .close_btn{
+	position: absolute;
+	cursor: pointer;
+	right: 8px;
+	top: 10px;
+	width: 18px;
+	height: 18px;
+	background-image: url(../images/close.png);
+}
+.detail-tab-nav{
+	text-align: center;
+	background-color: #effaff;
+	padding: 13px 0 0 0;
+	position: relative;
+	height: 58px;
+}
+.detail-nav-content{
+	background-color: #effaff;
+	min-height: 125px;
+	padding-top: 16px;
+}
+.detail-tab-nav .nav-list{
+	display: inline-block;
+}
+.detail-tab-nav .nav-list li{
+	float: left;
+	padding: 0px 50px;
+    border-bottom: 1px solid #e5e6e8;    cursor: pointer;
+    height: 45px;
+    line-height: 44px;
+}
+.detail-tab-nav .nav-list li.active{
+	border-bottom: 1px solid #00b5f8;
+	color: #00b5f8;
+}
+@media screen and (max-width: 1000px) {
+	.detail-tab-nav .nav-list li{
+		padding: 0px 25px;
+	}
+}
+@media screen and (max-width: 1000px) {
+	.fixed-table-container thead th .th-inner{
+		padding: 5px;
+	}
+}
+/* 
+.detail-tab-nav .nav-list li{
+	float: left;
+	padding: 2px 50px;
+    border: 1px solid #e5e6e8;
+    border-left: none;
+    cursor: pointer;
+    position: relative;
+    height: 26px;
+}
+.detail-tab-nav .nav-list li:before{
+	content: "";
+	position: absolute;
+	width: 22px;
+	height: 20px;
+	background-image:  url(../images/detail-nav-icon.png);
+	background-repeat: no-repeat; 
+	
+}
+.detail-tab-nav .nav-list li span{
+	margin-left: 22px;
+}
+.detail-tab-nav .nav-list .tab-detail:before{
+	background-position:-24px -3px;
+}
+.detail-tab-nav .nav-list .tab-monitor:before{
+	background-position:-24px -25px;
+}
+.detail-tab-nav .nav-list .tab-warning:before{
+	background-position:-24px -45px;
+}
+.detail-tab-nav .nav-list .tab-event:before{
+	background-position:-24px -105px;
+}
+.detail-tab-nav .nav-list .tab-disk:before{
+	background-position:-24px -65px;
+}
+
+.detail-tab-nav .nav-list .tab-detail.active:before{
+	background-position:-3px -3px;
+}
+.detail-tab-nav .nav-list .tab-monitor.active:before{
+	background-position:-3px -25px;
+}
+.detail-tab-nav .nav-list .tab-warning.active:before{
+	background-position:-3px -45px;
+}
+.detail-tab-nav .nav-list .tab-event.active:before{
+	background-position:-3px -105px;
+}
+.detail-tab-nav .nav-list .tab-disk.active:before{
+	background-position:-3px -65px;
+}
+
+
+.detail-tab-nav .nav-list li.first-nav{
+	border-left: 1px solid #e5e6e8;
+	border-radius: 20px 0 0 20px;
+}
+.detail-tab-nav .nav-list li.last-nav{
+	border-radius: 0 20px 20px  0;
+}
+.detail-tab-nav .nav-list li.active{
+	color: #87cefb;
+} */
+
+.detail-nav-content .tab-content{
+	display: none;
+}
+.detail-nav-content .detail-content{
+	position: relative;
+	height: 125px;
+	line-height: 26px;
+}
+.detail-nav-content .update-delete-btn{
+	position: absolute;
+	right: 0;
+	bottom: 10px;
+}
+.detail-nav-content>.active{
+	display: block;
+}
+
+.watch-content .chart-wrap-head{
+	background-color: #effaff;
+}
+/*清除浮动代码*/
+.clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0}
+.clearfloat{zoom:1}
+/*存储集群*/
+.relative{
+	position: relative;
+}
+.flex{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.cluster-name{
+	font-size: 24px;
+	font-weight: bold;
+	margin: 0
+}
+.cluster-version{
+	position: absolute;
+	bottom: 2px;
+	right: 5px;
+}
+
+.usage .capacity{
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+	margin: 0
+}
+
+
+.host-card > div p:first-child,.pool-card > div p:first-child{
+	font-size: 24px;
+	font-weight: bold;
+}
+.host-card > div >p ,.pool-card > div >p{
+	text-align: center;
+	margin:0; 
+	white-space: nowrap;
+}
+/*进度条*/
+.progress-wrap{
+	position: absolute;
+	bottom: 10px;
+	left: 0;
+	width: 100%;
+	padding: 0 8px;
+}
+.progress{
+	height: 12px;
+	background-color: #f2f3f6;
+	border-radius: 6px;
+	overflow: hidden;
+	margin: 0;
+}
+.used-capacity-progress{
+	background-color:#00b5f8; 
+	height: 12px;
+	line-height: 12px;
+}
+.progress-discribe .used{
+	float: left;
+}
+.progress-discribe .total{
+	float: right;
+}
+@media screen and (max-width: 1000px) {
+
+	.progress-discribe .used,.progress-discribe .total{
+		width: 50%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: inline-block;
+	}
+
+} 
+
+/*硬盘框*/
+.disk-card-wrap{
+	padding: 0 5px;
+	margin-bottom: 10px;
+}
+.disk-card-wrap .card-detail-wrap > div.card-detail{
+	padding-top:26px;
+}
+.disk-card-container{
+	border: 1px solid #ccc;
+	height: 142px;
+	position: relative;
+	overflow: hidden;
+}
+.disk-card-container .card-detail >p {
+	margin: 0 0 2px 0;
+}
+.disk-card-container .card-detail-wrap .card-detail p span{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+@media screen and (max-width: 1000px){
+	.disk-card-container .card-col-xs-6 {
+	    width: 100%;
+	 }
+	
+	.disk-card-wrap:hover .card-detail-wrap{
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+
+	}
+	.disk-card-wrap:hover .card-mask{
+	    display: block;
+	    background-color:#000;
+	    opacity: 0.8;
+	    z-index: 1;
+	 }
+	 .disk-card-container .card-detail-wrap .card-detail p span{
+		
+	    text-align: left;
+
+	}
+}
+
+/****chart-wrap***/
+.chart-wrap{
+	margin-bottom: 8px;
+	background-color: #fff;
+}
+.chart-wrap-head{
+	position: relative;
+	height: 36px;
+	line-height: 28px;
+	padding: 4px 8px;
+}
+
+.chart-wrap-head>div{
+	position: absolute;
+	height: 28px;
+}
+
+.chart-wrap-head>.legend-wrap{
+	width: 110px;
+	right: 0;
+}
+
+.chart-wrap-head>.chart-time-wrap{
+	right: 110px;
+	left: 80px;
+}
+.chart-wrap-head>.chart-time-wrap .time-input{
+	position: absolute;
+	right: 90px;
+	height: 28px;
+	left: 0;
+}
+.time-input >div{
+	width: 160px;
+	height: 28px;
+	margin-right: 16px;
+	font-family: sans-serif;
+}
+.chart-wrap-head>.chart-time-wrap>select{
+	position: absolute;
+	right: 0;
+	width: 90px;
+}
+
+.chart-wrap-head .form-control{
+	height: 28px;
+	padding: 0;
+}
+.chart-wrap-head input.form-control{
+	padding: 0 8px;
+	font-family:"MicrosoftYaHei",arial,helvetica,sans-serif;
+}
+.legend-wrap>span{
+	margin-left: 20px;
+}
+.legend-wrap i{
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	margin-right: 6px;
+}
+.legend-wrap .read{
+	background-color: #ee685d;
+}
+.legend-wrap .write{
+	background-color: #973fed;
+}
+
+/****chart-warp***/
+
+/***tooltip***/
+.alarmContent .tooltip_span{
+	cursor: pointer;
+}
+.tooltip-inner li{
+	text-align: left;
+}
+/***tooltip***/
+
+/*****bootstrap table extend*****/
+.fixed-table-body thead th .th-inner{
+	position: relative;
+}
+
+.th-inner .action_slide{
+	position: relative;
+	top:0;
+
+}
+.th-inner .action-group{
+	display: none;
+	position: absolute;
+}
+/*****bootstrap table extend*****/
+/****分分页样式***/
+.fixed-table-pagination .pagination .active a{
+	background-color: #00b5f8;
+	border-color: #00b5f8;
+	color: #fff;
+}
+.fixed-table-pagination .pagination>li>a,.fixed-table-pagination .pagination>li>span{
+	color: #00b5f8;
+}
+.pagination>li{
+	float:left;
+}
+/*******/
+ 
+#severity{
+ 	width: 100px;
+ 	height: 28px;
+  padding: 0;
+  display: inline-block;
+  margin-right: 10px;
+}
+ 
+.search_wraps{
+  margin-bottom: 7px;
+}
+.showAlarmDetail+.tooltip>.tooltip-inner{
+	text-align: left;
+}
+.detail-panel .showAlarmDetail{
+	color: rgb(51, 122, 183);
+	cursor: pointer;
+
+}
+.detail-panel .showAlarmDetail:hover{
+	color: #00b5f8;
+	text-decoration: underline;
+}
+.alarm_timepicker>input,.event_timepicker>input{
+	font-family: "MicrosoftYaHei",arial,helvetica,sans-serif;
+	height: 28px;
+	padding: 0 8px;
+	background-color: #fff;
+}
+.alarm_timepicker>input[readonly],.event_timepicker>input[readonly]{
+	background-color: #fff;
+}
+.alarm_timepicker>.input-group-addon,.event_timepicker>.input-group-addon{
+	padding: 0 8px;
+	background-color: #fff
+}
+.action_slide .dropdown-menu {
+	min-width: auto;
+}
+.action_slide .dropdown-menu li {
+	border-bottom: 1px solid #ccc;
+}
+.action_slide .dropdown-menu li:last-child {
+	border-bottom: 0;
+}
+.action_slide .dropdown-menu li.active>a{
+	background-color: #00B5F8;
+	color: #fff;
+}
+.fixed-table-body{
+	min-height: 300px;
+}
+.alarm-content>div,.event-content>div{
+	padding-bottom: 7px;
+}
+@media screen and (max-width: 1000px) {
+	.dropdown-menu{
+		left: -60px;
+	}
+}

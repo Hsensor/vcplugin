@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:osgi="http://www.springframework.org/schema/osgi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/osgi
+      http://www.springframework.org/schema/osgi/spring-osgi.xsd
+      http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+   <mvc:annotation-driven />
+   <context:annotation-config />
+
+   <bean
+      class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+      <property name="mediaTypes">
+         <map>
+            <entry key="json" value="application/json" />
+         </map>
+      </property>
+      <property name="viewResolvers">
+         <list>
+            <bean
+               class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+               <property name="prefix" value="/WEB-INF/views/" />
+               <property name="suffix" value=".jsp" />
+            </bean>
+         </list>
+      </property>
+      <property name="defaultViews">
+         <list>
+            <bean
+               class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+         </list>
+      </property>
+   </bean>
+
+   <bean name="dataAccessController" class="com.lenovo.h2000.mvc.DataAccessController" />
+   
+   <bean name="clustersController" class="com.lenovo.h2000.mvc.ClustersController" />
+
+   <bean name="storagepoolsController" class="com.lenovo.h2000.mvc.StoragepoolsController" />
+
+   <bean name="containersController" class="com.lenovo.h2000.mvc.ContainersController" />
+
+   <bean name="alertsController" class="com.lenovo.h2000.mvc.AlertsController" />
+
+   <bean name="eventsController" class="com.lenovo.h2000.mvc.EventsController" />
+
+   <bean name="hostsController" class="com.lenovo.h2000.mvc.HostsController" />
+
+   <bean name="jobsController" class="com.lenovo.h2000.mvc.JobsController" />
+
+   <bean name="datastoresController" class="com.lenovo.h2000.mvc.DatastoresController" />
+   
+   <bean name="healthchecksController" class="com.lenovo.h2000.mvc.HealthchecksController" />
+   
+   <bean name="disksController" class="com.lenovo.h2000.mvc.DisksController" />
+   
+   <bean name="licenseController" class="com.lenovo.h2000.mvc.LicenseController" />
+   
+   <bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>  
+   
+   <osgi:reference id="dataService"
+      interface="com.vmware.vise.data.query.DataService" />
+
+   <osgi:reference id="objectReferenceService"
+      interface="com.vmware.vise.data.query.ObjectReferenceService" />
+         
+   <osgi:reference id="clustersService"
+      interface="com.lenovo.h2000.services.ClustersService" />
+
+   <osgi:reference id="storagepoolsService"
+      interface="com.lenovo.h2000.services.StoragepoolsService" />
+
+   <osgi:reference id="containersService"
+      interface="com.lenovo.h2000.services.ContainersService" />
+
+   <osgi:reference id="alertsService"
+      interface="com.lenovo.h2000.services.AlertsService" />
+
+   <osgi:reference id="eventsService"
+      interface="com.lenovo.h2000.services.EventsService" />
+
+   <osgi:reference id="hostsService"
+      interface="com.lenovo.h2000.services.HostsService" />
+
+   <osgi:reference id="jobsService"
+      interface="com.lenovo.h2000.services.JobsService" />
+
+   <osgi:reference id="datastoresService"
+      interface="com.lenovo.h2000.services.DatastoresService" />
+   
+   <osgi:reference id="healthchecksService"
+      interface="com.lenovo.h2000.services.HealthchecksService" />
+   
+   <osgi:reference id="disksService"
+      interface="com.lenovo.h2000.services.DisksService" />
+      
+   <osgi:reference id="licenseService"
+      interface="com.lenovo.h2000.services.LicenseService" />
+      
+</beans>
+

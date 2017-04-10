@@ -1,0 +1,11 @@
+/H2000/src/main/webapp/assets/
+/H2000/src/main/webapp/resources/
+/H2000/src/main/app/node_modules
+/H2000/src/main/app/bower_components
+/H2000/src/main/app/assets/js/
+/H2000/target/
+/H2000-service/.classpath/
+/H2000-service/.project/
+/H2000-service/target/
+/H2000/src/main/webapp/locales/
+/H2000/build-java.sh

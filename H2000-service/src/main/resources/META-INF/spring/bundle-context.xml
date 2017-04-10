@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean name="ClustersServiceImpl" class="com.lenovo.h2000.services.ClustersServiceImpl" />
+
+	<bean name="StoragepoolsServiceImpl" class="com.lenovo.h2000.services.StoragepoolsServiceImpl" />
+
+	<bean name="ContainersServiceImpl" class="com.lenovo.h2000.services.ContainersServiceImpl" />
+
+	<bean name="AlertsServiceImpl" class="com.lenovo.h2000.services.AlertsServiceImpl" />
+
+	<bean name="EventsServiceImpl" class="com.lenovo.h2000.services.EventsServiceImpl" />
+
+	<bean name="HostsServiceImpl" class="com.lenovo.h2000.services.HostsServiceImpl" />
+
+	<bean name="JobsServiceImpl" class="com.lenovo.h2000.services.JobsServiceImpl" />
+
+	<bean name="DatastoresServiceImpl" class="com.lenovo.h2000.services.DatastoresServiceImpl" />
+	
+	<bean name="HealthchecksServiceImpl" class="com.lenovo.h2000.services.HealthchecksServiceImpl" />
+    
+    <bean name="DisksServiceImpl" class="com.lenovo.h2000.services.DisksServiceImpl" />
+    
+    <bean name="LicenseServiceImpl" class="com.lenovo.h2000.services.LicenseServiceImpl" />
+    
+</beans>

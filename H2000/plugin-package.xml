@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pluginPackage id="com.lenovo.h2000" version="1.2.3" name="h2000"
+	description="Lenovo Storage vSphere Client Plugin" vendor="VMware">
+	<dependencies>
+		<pluginPackage id="com.vmware.vsphere.client" version="6.0.0" />
+	</dependencies>
+	<bundlesOrder>
+		<bundle id="org.apache.commons.logging" />
+		<bundle id="org.apache.commons.codec" />
+		<bundle id="org.apache.http" />
+		<bundle id="org.apache.http.client" />
+		<bundle id="org.apache.http.entity" />
+		<bundle id="org.apache.http.client.methods" />
+		<bundle id="org.apache.http.impl.client" />
+		<bundle id="org.apache.http.util" />
+		<bundle id="com.lenovo.h2000.services" />
+	</bundlesOrder>
+</pluginPackage>

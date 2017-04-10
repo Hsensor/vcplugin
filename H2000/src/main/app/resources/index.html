@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="../assets/css/index.css">
+	<!--<script type="text/javascript" data-main="/vsphere-client/h2000/resources/js/app_config.js" src="/vsphere-client/h2000/assets/js/require.js"></script>-->
+</head>
+<body >
+	<div class="navigator-bar">
+		<ul class="navigator-bar-ul clearfix">
+			<li class="pull-left"><span>存储集群</span></li>
+			<li class="pull-left"><span>主机</span></li>
+			<li class="pull-left"><span>存储池</span></li>
+			<li class="pull-left"><span>卷容器</span></li>
+			<li class="pull-left"><span>告警</span></li>
+			<li class="pull-left"><span>事件</span></li>
+		</ul>
+		<div class="settings settings_dropdown dropdown" >
+		  <span id="settings_dropdown" role="button" data-toggle="dropdown">
+		    设置
+		    <span class="caret"></span>
+		  </span>
+		  <ul class="dropdown-menu pull-right" aria-labelledby="dLabel">
+		    <li><a href="javascript:void(0)" class="license-manager">License管理</a></li>
+		    <li><a href="javascript:void(0)" class="setting-ui">自定义UI</a></li>
+		    <li><a href="javascript:void(0)" class="help">帮助</a></li>
+		    <li><a href="javascript:void(0)" class="about">关于</a></li>
+		  </ul>
+		</div>
+	</div>
+	<div class="tabBody">
+		<div class="tab-content">	
+			<div class="storage-cluster-wrap clearfix summary">				
+				<div class="col-xs-3 card-wrap">
+					<div class="card-container  clearfix">
+						<div class="card relative flex">
+							<h1 class="cluster-name bluelighhight"></h1>
+							<div class="cluster-version fz"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-3 card-wrap">
+					<div class="card-container  clearfix">
+						<div class="card capacity-card relative flex">
+							<div class="usage">
+								<p class="capacity bluelighhight"></p>
+								<p class="align-center fz">物理剩余</p>
+							</div>
+							<div class="progress-wrap">
+								<div class="progress">
+									<div class="progress-bar used-capacity-progress"></div>
+								</div>
+								<div class="progress-discribe clearfloat">
+									<span class="used used-capacity-val fz"></span>
+									<span class="total total-capacity-val fz"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-3 card-wrap">
+					<div class="card-container  clearfix ">
+						<div class="card host-card flex">
+							<div class="col-xs-4">
+								<p class="host-count-val bluelighhight"></p>
+								<p class="fz">已添加主机</p>
+							</div>
+							<div class="col-xs-4">
+								<p class="bluelighhight">0</p>
+								<p class="fz">发现的主机</p>
+							</div>
+							<div class="col-xs-4">
+								<p class="disk-count-val bluelighhight"></p>
+								<p class="fz">硬盘</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-3 card-wrap">
+					<div class="card-container  clearfix">
+						<div class="card pool-card flex">
+							<div class="col-xs-6">
+								<p class="storagepool-count-val bluelighhight"></p>
+								<p class="fz">存储池</p>
+							</div>
+							<div class="col-xs-6">
+								<p class="container-count-val bluelighhight"></p>
+								<p class="fz">卷容器</p>
+							</div>
+						</div>
+					</div>
+				</div>				
+			</div>
+			<div class="cluster-charts-wrap" style="margin:7px;">
+				
+				<div class="chart-wrap">
+					<div class="chart-wrap-head">
+						<div class="chart-title">集群IOPS</div>
+						<div class="relative chart-time-wrap">
+							<div class="time-input clearfix" style="display:none">
+								
+								<div class='pull-right'>
+						            <div class="form-group">
+						                <div class='input-group date' id='cluster_end_input'>
+						                    <input type='text' class="form-control" placeholder="结束时间" readonly/>
+						                    <span class="input-group-addon" style="padding:0 8px;">
+						                        <span class="glyphicon glyphicon-calendar"></span>
+						                    </span>
+						                </div>
+						            </div>
+						        </div>
+
+						        <div class='pull-right'>
+						            <div class="form-group">
+						                <div class='input-group date' id='cluster_start_input'>
+						                    <input type='text' placeholder="起始时间" class="form-control" readonly />
+						                    <span class="input-group-addon" style="padding:0 8px;">
+						                        <span class="glyphicon glyphicon-calendar"></span>
+						                    </span>
+						                </div>
+						            </div>
+						        </div>
+							</div>
+							<select class="queryButton form-control chart-time-type" >
+							  <option value="realtime">实时</option>
+							  <option value="day">最近一天</option>
+							  <option value="week">最近一周</option>
+							  <option value="month">最近一个月</option>
+							  <option value="year">最近一年</option>
+							  <option value="define">自定义时间</option>
+							</select>
+						</div>
+						<div class="legend-wrap">
+							<span>
+								<i class="read"></i><span>读</span>
+							</span>
+							<span>
+								<i class="write"></i><span>写</span>
+							</span>
+						</div>
+					</div>
+					<div id="chart-cluster_iops" style="width:100%;height: 154px;overflow:hidden;"></div>
+				</div>
+				<div class="chart-wrap">
+					<div class="chart-wrap-head">
+						<div class="chart-title">集群吞吐量KBps</div>
+						<div class="legend-wrap">
+							<span>
+								<i class="read"></i><span>读</span>
+							</span>
+							<span>
+								<i class="write"></i><span>写</span>
+							</span>
+						</div>
+					</div>
+					<div id="chart-cluster_bandwidth" style="width:100%;height: 154px;overflow:hidden;"></div>
+				</div>
+				<div class="chart-wrap">
+					<div class="chart-wrap-head">
+						<div class="chart-title">集群延时ms</div>
+						<div class="legend-wrap">
+							<span>
+								<i class="read"></i><span>读</span>
+							</span>
+							<span>
+								<i class="write"></i><span>写</span>
+							</span>
+						</div>
+					</div>
+					<div id="chart-cluster_iolatency" style="width:100%;height: 154px;overflow:hidden;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-content">
+			<div class="host clearfix" id="host">
+				<!-- 详细信息 -->
+				<div class="col-xs-12 detail-panel" style="display: none;padding:0 7px;">
+					<div style="padding:7px 0;">
+						<div class="detail-tab-nav">
+							<ul class="nav-list clearfloat">
+								<li class="first-nav active tab-detail"><span>详情</span></li>
+								<li class="tab-disk"><span>硬盘</span></li>
+								<li class="tab-warning"><span>告警</span></li>
+								<li class="tab-event last-nav"><span>事件</span></li>
+							</ul>
+							<span class="close_btn"></span>
+						</div>
+						<div class="detail-nav-content">
+							<div class="tab-content detail-content active">
+								<div class="clearfix" style="max-width: 800px;margin:0 auto;">
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											主机名称：
+										</div>
+										<div class="t-a-l name-val">
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											主机IP：
+										</div>
+										<div class="t-a-l ip-val">
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											状态：
+										</div>
+										<div class="t-a-l status-val">
+											
+										</div>
+									</div>
+									<!--
+                                    <div class="col-xs-6">
+										<div class="t-a-r">
+											可用容量：
+										</div>
+										<div class="t-a-l free-val">
+											
+										</div>
+									</div>
+									-->
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											已使用容量：
+										</div>
+										<div class="t-a-l used-val">
+											
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											总容量：
+										</div>
+										<div class="t-a-l totalCapacity-val">
+											
+										</div>
+									</div>	
+								</div>
+							</div>
+							<div class="tab-content disks-content clearfix" style="padding:0 5px;">
+								
+							</div>
+
+							<div class="tab-content alarm-content" style="padding:0 7px;">
+							</div>
+							<div class="tab-content event-content" style="padding:0 7px">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 详细信息 -->
+			</div>
+			<div class="loading">...... loading start .......</div>
+		</div>
+		<div class="tab-content">
+			<div class="storage_pool clearfix" id="storage_pool">
+				
+				<!-- 详细信息 -->
+				<div class="col-xs-12 detail-panel" style="display: none;padding:7px;">
+					<div class="detail-tab-nav">
+						<ul class="nav-list clearfloat" >
+							<li class="first-nav active tab-detail"><span>详情</span></li>
+							<li class="tab-monitor"><span>监控</span></li>
+							<li class="tab-disk"><span>硬盘</span></li>
+							<!-- <li class="tab-monitor" style="display: none"><span>卷容器</span></li>  -->
+							<li class="tab-monitor"><span>卷容器</span></li>
+							<li class="tab-warning"><span>告警</span></li>
+							<li class="tab-event last-nav"><span>事件</span></li>
+						</ul>
+						<span class="close_btn"></span>
+					</div>
+					<div class="detail-nav-content" >
+						<div class="tab-content detail-content active">
+							<div class="clearfix" style="max-width: 800px;margin:0 auto;">
+								<div class="col-xs-6">
+									<div class="t-a-r">
+										名称：
+									</div>
+									<div class="t-a-l name-val">
+										
+									</div>
+								</div>
+								<div class="col-xs-6">
+									<div class="t-a-r">
+										硬盘个数：
+									</div>
+									<div class="t-a-l disks-val">
+										datastore1
+									</div>
+								</div>
+								<div class="col-xs-6">
+									<div class="t-a-r">
+										可用容量：
+									</div>
+									<div class="t-a-l available-val">
+										
+									</div>
+								</div>
+								<div class="col-xs-6">
+									<div class="t-a-r">
+										已使用容量：
+									</div>
+									<div class="t-a-l used-val">
+										
+									</div>
+								</div>
+								<div class="col-xs-6">
+									<div class="t-a-r">
+										总容量：
+									</div>
+									<div class="t-a-l total-val">
+										
+									</div>
+								</div>
+								<div class="col-xs-6">
+									<div class="t-a-r">
+										创建时间：
+									</div>
+									<div class="t-a-l create-time">
+										
+									</div>
+								</div>
+								
+							</div>
+							<div style="text-align:right;" class="update-delete-btn">
+								<a class="expand" style="display: none"><span></span>扩容</a><a class="update"><span></span>更新</a><a class="delete"><span></span>删除</a>
+							</div>
+						</div>
+						<div class="tab-content watch-content" >
+							<div class="chart-wrap">
+								<div class="chart-wrap-head">
+									<div class="chart-title">存储池IOPS</div>
+									<div class="relative chart-time-wrap">
+										<div class="time-input clearfix" style="display:none">
+	
+											<div class='pull-right'>
+									            <div class="form-group">
+									                <div class='input-group date' id='storagePool_end_input'>
+									                    <input type='text' class="form-control" placeholder="结束时间" readonly/>
+									                    <span class="input-group-addon" style="padding:0 8px;">
+									                        <span class="glyphicon glyphicon-calendar"></span>
+									                    </span>
+									                </div>
+									            </div>
+									        </div>
+
+									        <div class='pull-right'>
+									            <div class="form-group">
+									                <div class='input-group date' id='storagePool_start_input'>
+									                    <input type='text' placeholder="起始时间" class="form-control" readonly />
+									                    <span class="input-group-addon" style="padding:0 8px;">
+									                        <span class="glyphicon glyphicon-calendar"></span>
+									                    </span>
+									                </div>
+									            </div>
+									        </div>
+										</div>
+										<select class="queryButton form-control chart-time-type" >
+										  <option value="realtime">实时</option>
+										  <option value="day">最近一天</option>
+										  <option value="week">最近一周</option>
+										  <option value="month">最近一个月</option>
+										  <option value="year">最近一年</option>
+										  <option value="define">自定义时间</option>
+										</select>
+									</div>
+
+									<div class="legend-wrap">
+										<span>
+											<i class="read"></i><span>读</span>
+										</span>
+										<span>
+											<i class="write"></i><span>写</span>
+										</span>
+									</div>
+								</div>
+								<div class="chart-storage_pool_iops" id="chart-storage_pool_iops" style="height:154px;overflow:hidden;"></div>
+							</div>
+							<div class="chart-wrap">
+								<div class="chart-wrap-head">
+									<div class="chart-title">存储池吞吐量KBps</div>
+									<div class="legend-wrap">
+										<span>
+											<i class="read"></i><span>读</span>
+										</span>
+										<span>
+											<i class="write"></i><span>写</span>
+										</span>
+									</div>
+								</div>
+								<div class="chart-storage_pool_bandwidth" id="chart-storage_pool_bandwidth" style="height:154px;overflow:hidden;"></div>
+							</div>
+							<div class="chart-wrap">
+								<div class="chart-wrap-head">
+									<div class="chart-title">存储池延时ms</div>
+									<div class="legend-wrap">
+										<span>
+											<i class="read"></i><span>读</span>
+										</span>
+										<span>
+											<i class="write"></i><span>写</span>
+										</span>
+									</div>
+								</div>
+								<div class="chart-storage_pool_iolatency" id="chart-storage_pool_iolatency" style="height:154px;overflow:hidden;"></div>
+							</div>
+						</div>
+						<div class="tab-content disks-content" >
+						
+							<div class="storage-pool-disks-list-wrap">
+								<div class="storage-pool-disks-list clearfix" style="padding:0 5px">
+				
+								</div>
+							</div>
+						</div>
+ 					<!-- 	<div class="tab-content containers-content" style="display: none" >
+							<div class="storage-pool-containers-list-wrap">
+								<div class="storage-pool-containers-list">
+								
+								</div>
+							</div>
+						</div>  -->
+						<div class="tab-content containers-content" style="padding : 0 5px 5px 5px;">
+							<div class="storage-pool-containers-wrap">
+								<div class="storage-pool-containers-list clearfix"></div>
+							</div>
+						</div>
+						<div class="tab-content alarm-content" style="padding : 0 7px;">
+							
+							<div id="grid-storagepool-alert"></div>
+						</div>
+						<div class="tab-content event-content" style="padding : 0 7px;">
+							
+							<div id="grid-storagepool-events"></div>
+						</div>
+					</div>
+				</div>
+				<!-- 详细信息 -->
+
+				<!-- 添加 -->
+				<div class="col-xs-3 card-wrap">
+					<div class="card-container  clearfix">
+						<div class="card">
+							<div class="add-card"></div>
+						</div>
+					</div>
+				</div>
+				<!-- 添加 -->
+			</div>
+			<div class="loading">...... loading start .......</div>
+		</div>
+		<div class="tab-content">
+			<div class="volume_container clearfix" id="volume_container">
+				
+				<!-- 详细信息 -->
+				<div class="col-xs-12 detail-panel" style="display: none;padding:0 7px;">
+					<div style="padding:7px 0;">
+						<div class="detail-tab-nav">
+							<ul class="nav-list clearfloat">
+								<li class="first-nav active tab-detail"><span>详情</span></li>
+								<li class="tab-monitor"><span>监控</span></li>
+								<li class="tab-warning"><span>告警</span></li>
+								<li class="tab-event last-nav"><span>事件</span></li>
+							</ul>
+
+							<span class="close_btn"></span>
+						</div>
+						<div class="detail-nav-content">
+							<div class="tab-content detail-content active" style="height:146px;">
+								<div class="clearfix" style="max-width: 800px;margin:0 auto;">
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											名称：
+										</div>
+										<div class="t-a-l name-val">
+											volume container
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											Datastore：
+										</div>
+										<div class="t-a-l datastore-val">
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											副本数：
+										</div>
+										<div class="t-a-l replication-val">
+											
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											文件类型：
+										</div>
+										<div class="t-a-l fst-val">
+											
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											预留容量：
+										</div>
+										<div class="t-a-l reservecapacity-val">
+											
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											存储池：
+										</div>
+										<div class="t-a-l storagepool-val">
+											
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											可用容量：
+										</div>
+										<div class="t-a-l freecapacity-val">
+											
+										</div>
+									</div>	
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											已使用容量：
+										</div>
+										<div class="t-a-l usedcapacity-val">
+											
+										</div>
+									</div>	
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											总容量：
+										</div>
+										<div class="t-a-l totalcapacity-val">
+											
+										</div>
+									</div>	
+									<div class="col-xs-6">
+										<div class="t-a-r">
+											创建时间：
+										</div>
+										<div class="t-a-l createtime-val">
+											
+										</div>
+									</div>		
+								</div>
+								<div style="text-align:right;" class="update-delete-btn"><a class="update"><span></span>更新</a><a class="delete"><span></span>删除</a>
+								</div>
+							</div>
+							<div class="tab-content watch-content">
+								<div class="chart-wrap">
+									<div class="chart-wrap-head">
+										<div class="chart-title">卷容器IOPS</div>
+										<div class="relative chart-time-wrap">
+											<div class="time-input clearfix" style="display:none">
+		
+												<div class='pull-right'>
+										            <div class="form-group">
+										                <div class='input-group date' id='volumeContainer_end_input'>
+										                    <input type='text' class="form-control" placeholder="结束时间" readonly/>
+										                    <span class="input-group-addon" style="padding:0 8px;">
+										                        <span class="glyphicon glyphicon-calendar"></span>
+										                    </span>
+										                </div>
+										            </div>
+										        </div>
+
+										        <div class='pull-right'>
+										            <div class="form-group">
+										                <div class='input-group date' id='volumeContainer_start_input'>
+										                    <input type='text' placeholder="起始时间" class="form-control" readonly />
+										                    <span class="input-group-addon" style="padding:0 8px;">
+										                        <span class="glyphicon glyphicon-calendar"></span>
+										                    </span>
+										                </div>
+										            </div>
+										        </div>
+											</div>
+											<select class="queryButton form-control chart-time-type" >
+											  <option value="realtime">实时</option>
+											  <option value="day">最近一天</option>
+											  <option value="week">最近一周</option>
+											  <option value="month">最近一个月</option>
+											  <option value="year">最近一年</option>
+											  <option value="define">自定义时间</option>
+											</select>
+										</div>
+										<div class="legend-wrap">
+											<span>
+												<i class="read"></i><span>读</span>
+											</span>
+											<span>
+												<i class="write"></i><span>写</span>
+											</span>
+										</div>
+									</div>
+									<div id="chart-container_iops" style="height:154px;overflow:hidden;"></div>
+								</div>
+								<div class="chart-wrap">
+									<div class="chart-wrap-head">
+										<div class="chart-title">卷容器吞吐量KBps</div>
+										<div class="legend-wrap">
+											<span>
+												<i class="read"></i><span>读</span>
+											</span>
+											<span>
+												<i class="write"></i><span>写</span>
+											</span>
+										</div>
+									</div>
+									<div id="chart-container_bandwidth" style="height:154px;overflow:hidden;"></div>
+								</div>
+								<div class="chart-wrap">
+									<div class="chart-wrap-head">
+										<div class="chart-title">卷容器延时ms</div>
+										<div class="legend-wrap">
+											<span>
+												<i class="read"></i><span>读</span>
+											</span>
+											<span>
+												<i class="write"></i><span>写</span>
+											</span>
+										</div>
+									</div>
+									<div id="chart-container_iolatency" style="height:154px;overflow:hidden;"></div>
+								</div>
+							</div>
+							<div class="tab-content alarm-content" style="padding:0 7px;" >
+								
+								<div id="grid-container-alert"></div>
+							</div>
+							<div class="tab-content event-content" style="padding:0 7px;">
+								
+								<div id="grid-container-events"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 详细信息 -->
+
+				<!-- 添加 -->
+				<!-- <div class="col-xs-3 card-wrap">
+					<div class="card-container  clearfix">
+						<div class="card">
+							<div class="add-card"></div>
+						</div>
+					</div>
+				</div> -->
+				<!-- 添加 -->
+			</div>
+			<div class="loading">...... loading start .......</div>
+		</div>
+		<div class="tab-content">
+			<div id="alarm" class="contentPadding">	
+				<div class="alarm_btns">查看<span class="firedAlarmBtn active">已触发的警报</span><span class="rulesAlarmBtn">定义告警</span></div>
+				<div class="search_wraps">
+					<!-- alarm search-->
+					<div class="alarm_search">
+            <div class="clearfix" style="display:inline-block;">
+	            <div class="form-group pull-left" style="width:300px;display:inline-block;margin-bottom:0;">
+	                <div class='input-group date alarm_timepicker'>
+	                    <input type='text' class="form-control"  placeholder="结束时间" readonly/>
+	                    <span class="input-group-addon">
+	                        <span class="glyphicon glyphicon-calendar"></span>
+	                    </span>
+	                </div>
+	            </div>
+	            <div style="width:300px;display:inline-block;line-height:28px;">(获取结束时间前2天的数据)</div>
+            </div>
+					</div>
+					<!-- alarm search-->
+				</div>
+				<div class="alarmContent">
+					<div class="firedAlarm active">
+					</div>
+					<div class="rulesAlarm fixed-table-body">
+						<table>
+							<thead>
+								<tr>
+									<th>告警名称</th>
+									<th>
+										<span class="dropdown action_slide">对象
+											<span class="glyphicon glyphicon-chevron-down dropdown-toggle" data-toggle="dropdown"></span>
+											<ul class="dropdown-menu alarm-rules-list" id="li_active">
+												<li data-type="all" class="active"><a href="javascript:void(0)">全部</a></li>
+												<li data-type="cluster"><a href="javascript:void(0)">存储集群</a></li>
+												<li data-type="storagepool"><a href="javascript:void(0)">存储池</a></li>
+												<li data-type="container"><a href="javascript:void(0)">卷容器</a></li>
+												<li data-type="host"><a href="javascript:void(0)">主机</a></li>
+												<li data-type="disk"><a href="javascript:void(0)">硬盘</a></li>
+											</ul>
+										</span>									
+									</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="tab-content">
+			<div id="event" class="contentPadding">
+				<div class="search_wraps">
+					<div class="clearfix" style="display:inline-block;">
+			            <div class="form-group pull-left" style="width:300px;display:inline-block;margin-bottom:0;">
+			                <div class='input-group date event_timepicker'>
+			                    <input type='text' class="form-control"  placeholder="结束时间" readonly/>
+			                    <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+			                </div>
+			            </div>
+			            <div style="width:300px;display:inline-block;line-height:28px;">(获取结束时间前2天的数据)</div>
+			        </div>
+		        </div>
+		        
+				<div class="event_table" class="contentPadding">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="license-invalide-mask" id="license-invalide-mask">
+		<div class="license-invalide-body">	
+			<div class="upload_license_wrap">
+				<div class="license-invalide-tip">请上传有效的License文件</div>
+				<h4 class="license-title">License 管理</h4>	
+	      <form id="uploadLicense">
+	        <div class="file-wrap" >
+	          <div class="input_wrap" id="selectLicenseBtn"><span >选择文件</span><span class="filename"></span></div><span class="upload_license_btn">上传文件</span>
+	        </div>
+	      </form>
+	      <div class="license-tip"></div>
+	    </div>
+    </div>
+	</div>
+	<script type="text/javascript">
+		// ------------------------------------------------------------------------------
+		// Javascript initialization to include when using the HTML bridge:
+		// - Creates the plugin's private namespace com_lenovo_h2000
+		// - Defines APIs to ensure compatibility with future Web Client HTML platform
+		// ------------------------------------------------------------------------------
+
+		// WEB_PLATFORM is the VMware Web Client platform reference.
+		// When the Flex client is running it is defined as the Flash container.
+		var WEB_PLATFORM;
+
+		// Define a private namespace using the plugin bundle name,
+		// It should be the only global symbol added by this plugin!
+		var com_lenovo_h2000;
+		if (!com_lenovo_h2000) {
+		   com_lenovo_h2000 = {};
+
+		   // The web context path to use for server requests
+		   // (same as the Web-ContextPath value in the plugin's MANIFEST.MF)
+		   com_lenovo_h2000.webContextPath = "/vsphere-client/h2000";
+
+		   // The API setup is done inside an anonymous function to keep things clean.
+		   // See the HTML bridge documentation for more info on those APIs.
+		   (function () {
+		      // Namespace shortcut
+		      var ns = com_lenovo_h2000;
+
+		      // ------------------------ Private functions -------------------------------
+		   
+		      // Get a string from the resource bundle defined in plugin.xml
+		      function getString(key, params) {
+		         return WEB_PLATFORM.getString("com_lenovo_h2000", key, params);
+		      }
+
+		      // Get a parameter value from the current document URL
+		      function getURLParameter(name) {
+		         // Use location.href because location.search may be null with some frameworks
+		         return (new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)')
+		               .exec(location.href) || [,""])[1].replace(/\+/g, '%20') || null;
+		      }
+
+		      // Build the REST url prefix to retrieve a list of properties,
+		      // this is mapped to the DataAccessController on the java side.
+		      function buildDataUrl(objectId, propList) {
+		         var propStr = propList.toString();
+		         var dataUrl = ns.webContextPath +
+		               "/rest/data/properties/" + objectId + "?properties=" + propStr;
+		         return dataUrl;
+		      }
+
+		      // -------------------------- Public APIs --------------------------------
+
+		      // Functions exported to the com_lenovo_h2000 namespace
+		      ns.getString = getString;
+		      ns.buildDataUrl = buildDataUrl;
+		      var ua = navigator.userAgent.toLowerCase(),version;
+
+		      // APIs added to WEB_PLAFORM for compatibility with future HTML platform
+		      if (!WEB_PLATFORM) {
+
+		      	var info = {  
+				    ie:/msie/.test(ua)&&!/opera/.test(ua),  
+				    op:/opera/.test(ua),  
+				    sa:/version.*safari/.test(ua),  
+				    ch:/chrome/.test(ua),  
+				    ff:/gecko/.test(ua)&&!/webkit/.test(ua)  
+				 };
+				 WEB_PLATFORM = self.parent.document.getElementById("container_app");
+
+				 if (info.ch) {
+				 	version  = ua.match(/chrome\/(\d+)/);
+				 	if(version[1]>=55){
+				 		WEB_PLATFORM = Object.create(self.parent.document.getElementById("container_app"));
+				 	}
+				 }
+
+
+		         // Get the current context object id or return null if none is defined
+		         WEB_PLATFORM.getObjectId = function() {
+		            return getURLParameter("objectId");
+		         };
+		         // Get the current action Uid or return null if none is defined
+		         WEB_PLATFORM.getActionUid = function() {
+		            return getURLParameter("actionUid");
+		         };
+		         // Get the comma-separated list of object ids for an action, or null for a global action
+		         WEB_PLATFORM.getActionTargets = function() {
+		            return getURLParameter("targets");
+		         };
+		         // Get the current locale
+		         WEB_PLATFORM.getLocale = function() {
+		            return getURLParameter("locale");
+		         };
+
+		         // Get the info provided in a global view using a vCenter selector
+		         WEB_PLATFORM.getVcSelectorInfo = function() {
+		            var info = {serviceGuid: getURLParameter("serviceGuid"),
+		                        sessionId: getURLParameter("sessionId"),
+		                        serviceUrl: getURLParameter("serviceUrl")};
+		            return info;
+		         };
+		      }
+		   })();
+		}
+		/*function appendRequireScript(ns){
+			var oScript = document.createElement('script');
+			oScript.src= ns.webContextPath+"/assets/js/require.js";
+			oScript.setAttribute("data-main",ns.webContextPath+"/resources/app_config.js");
+			oScript.setAttribute("type","text/javascript");
+
+			document.head.appendChild(oScript);
+		}
+		
+		appendRequireScript(com_lenovo_h2000)*/
+	</script>
+	<script type="text/html" id="volume_container_card">
+		<div class="col-xs-3 card-wrap">
+			<div class="card-container  clearfix">
+				<div class="card card-icon-wrap card-col-xs-4">
+					<div class="card-cover">
+						<div class="card-icon volume_container-icon">
+							
+						</div>
+						<div class="card-title-wrap">
+							<span class="card-icon-status">
+							</span>
+							<span class="card-icon-title">
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="card card-detail-wrap card-col-xs-6">
+					<div class="card-mask"></div>
+					<div class="card-detail">
+						<p class="available">&nbsp;&nbsp;&nbsp;&nbsp;可用：<span></span></p>
+						<p class="already-used">已使用：<span></span></p>
+						<p class="total-capacity">总容量：<span></span></p>
+						<p class="datastore-name">Datastore:<span></span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+
+	<script type="text/html" id="storage_pool_card">
+		<div class="col-xs-3 card-wrap">
+			<div class="card-container  clearfix">
+				<div class="card card-icon-wrap card-col-xs-4">
+					<div class="card-cover">
+						<div class="card-icon">
+							
+						</div>
+						<div class="card-title-wrap">
+							<span class="card-icon-status success"></span>	
+							<span class="card-icon-title">
+								name
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="card card-detail-wrap card-col-xs-6">
+					<div class="card-mask"></div>
+					<div class="card-detail">
+						<p class="available">&nbsp;&nbsp;&nbsp;&nbsp;可用：<span></span></p>
+						<p class="already-used">已使用：<span></span></p>
+						<p class="total-capacity">总容量：<span></span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+	<script type="text/html" id="host_card">
+		<div class="col-xs-3 card-wrap">
+			<div class="card-container  clearfix">
+				<div class="card card-icon-wrap card-col-xs-4">
+					<div class="card-cover">
+						<div class="card-icon host-icon">
+							
+						</div>
+						<div class="card-title-wrap">
+							<span class="card-icon-status success">
+							</span>
+							<span class="card-icon-title">
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="card card-detail-wrap card-col-xs-6">
+					<div class="card-mask"></div>
+					<div class="card-detail">
+						<p class="host_ip">主机IP：<span></span></p>
+						<p class="host_status">状&nbsp;&nbsp;&nbsp;态：<span></span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+
+	<script type="text/html" id="host_discover_card">
+		<div class="col-xs-3 card-wrap add">
+			<div class="card-container  clearfix">
+				<div class="card card-icon-wrap card-col-xs-4">
+					<div class="card-cover">
+						<div class="card-icon discover-host-icon">
+							
+						</div>
+						<div class="card-title-wrap">
+							<span class="card-icon-title">
+								点击添加此主机
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="card card-detail-wrap card-col-xs-6">
+					<div class="card-mask"></div>
+					<div class="card-detail">
+						<p>主机IP：<span></span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+
+	<script type="text/html" id="btnCardWrap">
+		<div class="col-xs-3 card-wrap add">
+			<div class="card-container  clearfix">
+				<div class="card">
+					<div class="add-card"></div>
+				</div>
+			</div>
+		</div>
+	</script>
+
+	<script type="text/html" id="storagePoolDiskPanel">
+		<div class="col-xs-3 disk-card-wrap" >
+			<div class="disk-card-container clearfix">
+				<div class="card-icon-wrap card-col-xs-4">
+					<div class="card-cover">
+						<div class="card-icon disk-icon"></div>
+						<div class="card-title-wrap">
+							<span class="card-icon-status"></span>
+							<span class="card-icon-title">硬盘序列号1</span>
+						</div>
+					</div>
+				</div>
+				<div class="card-detail-wrap card-col-xs-6">
+					<div class="card-mask"></div>
+					<div class="card-detail">
+						<p class="disk-type">硬盘类型：<span></span></p>
+						<p class="disk-status">硬盘状态：<span></span></p>
+						<p class="disk-avalible">可用容量：<span></span></p>
+						<p class="disk-total">&nbsp;&nbsp;&nbsp;&nbsp;总容量：<span></span></p>
+						<!-- <p class="disk-life">SSD硬盘寿命:<span></span></p> -->
+					</div>
+				</div>
+			</div>
+		</div>	
+	</script>
+	<script type="text/html" id="storagePoolContainerPanel">
+		<div class="col-xs-3 disk-card-wrap" >
+			<div class="disk-card-container clearfix">
+				<div class="card-icon-wrap card-col-xs-4">
+					<div class="card-cover">
+						<div class="card-icon"></div>
+						<div class="card-title-wrap">
+							<span class="card-icon-status"></span>
+							<span class="card-icon-title">卷容器1</span>
+						</div>
+					</div>
+				</div>
+				<div class="card-detail-wrap card-col-xs-6">
+					<div class="card-mask"></div>
+					<div class="card-detail">
+						
+						<p class="disk-avalible">可用：<span></span></p>
+						<p class="disk-used">已使用：<span></span></p>
+						<p class="disk-total">总容量：<span></span></p>
+						<p class="disk-life">datastore：<span></span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+	<!--inject:js-->
+	<!--endinject-->
+</body>
+</html>

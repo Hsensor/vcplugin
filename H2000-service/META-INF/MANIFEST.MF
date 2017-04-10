@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: H2000-service
+Bundle-SymbolicName: H2000-service
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.lenovo.h2000.mvc,
+ com.lenovo.h2000.services

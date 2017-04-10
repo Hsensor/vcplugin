@@ -1,0 +1,20 @@
+<extension>
+   <description>
+      <label>Lenovo LHS</label>
+      <summary>Lenovo H2000 storage plugin for VMware</summary>
+   </description>
+   <key>com.lenovo.h2000.H2000</key>
+   <company>VMware</company>
+   <version>1.5.6</version>
+   <client>
+      <version>1.5.6</version>
+      <description>
+         <label>Lenovo LHS</label>
+         <summary>Lenovo H2000 storage plugin for VMware</summary>
+      </description>
+      <company>VMWare</company>
+      <type>vsphere-client-serenity</type>
+      <url>http://10.100.123.236:3000/H2000.zip</url>
+   </client>
+   <lastHeartbeatTime>2017-03-14T08:42:59.814418Z</lastHeartbeatTime>
+</extension>

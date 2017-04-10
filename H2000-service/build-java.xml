@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="H2000-service" default="make-jar-bundle">
+    
+	<property environment="env"/>
+	<property name="VSPHERE_SDK_HOME" value="${env.VSPHERE_SDK_HOME}" />
+	<property name="JAR_FILE" value="H2000-service.jar" />
+
+	<property name="BUILD_DIR" value="${basedir}/target" />
+	<property name="CLASSES" value="${BUILD_DIR}/classes" />
+	<property name="RES_DIR" value="${basedir}/src/main/resources" />
+
+	<target name="clean">
+		<delete dir="${BUILD_DIR}" />
+		<mkdir dir="${BUILD_DIR}/classes" />
+	</target>
+
+	<target name="compile-java" depends="clean">
+		<javac target="1.6" source="1.6" includeantruntime="false" destdir="${CLASSES}" fork="true" debug="on">
+			<src path="${basedir}/src/main/java" />
+			<classpath>
+				<pathelement path="${VSPHERE_SDK_HOME}/libs/vsphere-client-lib.jar" />
+				<pathelement path="${VSPHERE_SDK_HOME}/libs/spring-web-3.1.4.RELEASE.jar" />
+				<pathelement path="${VSPHERE_SDK_HOME}/libs/spring-beans-3.1.4.RELEASE.jar" />
+				<pathelement path="${VSPHERE_SDK_HOME}/libs/spring-context-3.1.4.RELEASE.jar" />
+				<pathelement path="${VSPHERE_SDK_HOME}/libs/commons-logging-1.2.jar" />
+				<pathelement path="${VSPHERE_SDK_HOME}/libs/commons-codec-1.9.jar" />
+				<pathelement path="${VSPHERE_SDK_HOME}/libs/httpclient-4.5.2.jar" />
+				<pathelement path="${VSPHERE_SDK_HOME}/libs/httpcore-4.4.4.jar" />
+				<pathelement path="${VSPHERE_SDK_HOME}/libs/httpmine-4.5.2.jar" />
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="make-jar-bundle" depends="compile-java">
+		<copy todir="${CLASSES}">
+			<fileset dir="${RES_DIR}" />
+		</copy>
+		<jar destfile="${BUILD_DIR}/${JAR_FILE}" 
+			manifest="${RES_DIR}/META-INF/MANIFEST.MF" 
+			basedir="${CLASSES}" />
+	</target>
+</project>
+

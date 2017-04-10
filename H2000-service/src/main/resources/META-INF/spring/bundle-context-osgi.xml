@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+	<osgi:service id="ClustersService" ref="ClustersServiceImpl"
+		interface="com.lenovo.h2000.services.ClustersService" />
+
+	<osgi:service id="StoragepoolsService" ref="StoragepoolsServiceImpl"
+		interface="com.lenovo.h2000.services.StoragepoolsService" />
+
+	<osgi:service id="ContainersService" ref="ContainersServiceImpl"
+		interface="com.lenovo.h2000.services.ContainersService" />
+
+	<osgi:service id="AlertsService" ref="AlertsServiceImpl"
+		interface="com.lenovo.h2000.services.AlertsService" />
+
+	<osgi:service id="EventsService" ref="EventsServiceImpl"
+		interface="com.lenovo.h2000.services.EventsService" />
+
+	<osgi:service id="HostsService" ref="HostsServiceImpl"
+		interface="com.lenovo.h2000.services.HostsService" />
+
+	<osgi:service id="JobsService" ref="JobsServiceImpl"
+		interface="com.lenovo.h2000.services.JobsService" />
+
+	<osgi:service id="DatastoresService" ref="DatastoresServiceImpl"
+		interface="com.lenovo.h2000.services.DatastoresService" />
+		
+    <osgi:service id="HealthchecksService" ref="HealthchecksServiceImpl"
+	    interface="com.lenovo.h2000.services.HealthchecksService" />
+	    
+    <osgi:service id="DisksService" ref="DisksServiceImpl"
+		interface="com.lenovo.h2000.services.DisksService" />
+		
+	<osgi:service id="LicenseService" ref="LicenseServiceImpl"
+        interface="com.lenovo.h2000.services.LicenseService" />
+        
+	<osgi:reference id="dataService"
+        interface="com.vmware.vise.data.query.DataService" />
+        
+    <osgi:reference id="objectReferenceService"
+        interface="com.vmware.vise.data.query.ObjectReferenceService" />
+		
+</beans>
